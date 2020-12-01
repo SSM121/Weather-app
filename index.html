@@ -11,7 +11,25 @@
 
 	<body>
 		<script src="https://unpkg.com/vue@next"></script>
+		<div id="app">
+			<div id="head" class="black stuff-box shadowed" >
+				<h1>
+					Vue.js Weather site
+				</h1>
+			</div>
+			<div id="ipBox" class="blue stuff-box shadowed">
+				<h1>
+					Your location
+				</h1>
+				<p v-if="ipReady">
+					You are located in {{ ipInfo.city }}, {{ ipInfo.region_name }}, {{ ipInfo.country_name}} at the coordinates ({{ipInfo.latitude}}, {{ipInfo.longitude}}).
 
+				</p>
+				<p v-else>
+					Waiting for location information
+				</p>
+			</div>
+		</div>
 		<script src="script.js"> </script>
 	</body>
 </html>
