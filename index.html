@@ -29,6 +29,76 @@
 					Waiting for location information
 				</p>
 			</div>
+			<div id="currWeatherBox" class="yellow stuff-box shadowed">
+				<h1> 
+					Current Conditions 
+				</h1>
+				<div v-if="currWeatherReady">
+					Current weather conditions @ {{date}}
+					<ul>
+						<li>
+							Currently: {{currWeather.main.temp}}F
+						</li>
+						<li>
+							High: {{currWeather.main.temp_max}}F
+						</li>
+						<li>
+							Low: {{currWeather.main.min}}F
+						</li>
+						<li>
+							{{currWeather.weather[0].description}}
+						</li>
+						<li>
+							{{currWeather.main.humidity}}% humidity
+						</li>
+						<li>
+							{{currWeather.main.pressure}}hPa pressure
+						</li>
+					</ul>
+				</div>
+				<div v-else>
+					Waiting on current weather
+				</div>
+
+			</div>
+			<div id="forcastWeatherBox" class="blue stuff-box shadowed">
+				<h2 v-if="forcastWeatherReady">
+					5-Day 3 Hour forcast:
+				</h2>
+				<h2 v-else>
+					Waiting on forcast weather.
+				</h2>
+				<h3 v-if="forcastWeatherReady">
+					<span style="color: rgb(255,0,0)">{{unlikely}} unlikely </span><span style="color: black">{{neutral}} neutral </span><span style="color: rgb(0,255,0)">{{likely}} likely</span>
+				</h3>
+				<div v-if="forcastWeatherReady" v-for="forcast in forcasts" >
+					<div class="stuff-box shadowed" :class="{ black: forcast.isNeutral, green: forcast.isLikely, red: forcast.isUnlikely}" 
+						@click="activate(forcast.id, $event)">
+						Weather conditions @ {{forcast.date}}
+						<ul>
+							<li>
+								Currently: {{forcast.temp}}F
+							</li>
+							<li>
+								High: {{forcast.temp_max}}F
+							</li>
+							<li>
+								Low: {{forcast.min}}F
+							</li>
+							<li>
+								{{forcast.sky}}
+							</li>
+							<li>
+								{{forcast.humidity}}% humidity
+							</li>
+							<li>
+								{{forcast.pressure}}hPa pressure
+							</li>
+						</ul>
+				
+					</div>
+				</div>
+			</div>
 		</div>
 		<script src="script.js"> </script>
 	</body>
